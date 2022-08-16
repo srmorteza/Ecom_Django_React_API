@@ -7,6 +7,8 @@ name = "pypi"
 django = "==3.0.8"
 django-cors-headers = "*"
 djangorestframework = "*"
+pillow = "*"
+typing-extensions = "*"
 
 [dev-packages]
 
