@@ -6,7 +6,7 @@ from django.shortcuts import render
 import random
 from rest_framework.permissions import AllowAny
 from rest_framework import viewsets
-from .serializers import serializers
+from .serializers import UserSerializer
 from .models import CustomUser
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
@@ -60,10 +60,26 @@ def signin(request):
         return JsonResponse({'Error': 'invalide email'})
 
 
+def signout(request, id):
+    logout(request)
+
+    UserModel = get_user_model()
+
+    try:
+        user = UserModel.objects.get(pk=id)
+        user.session_token = "0"
+        user.save()
+
+    except UserModel.DoesNotExist:
+        return JsonResponse({'error': 'Invalid user ID'})
+
+    return JsonResponse({'success': 'Logout success'})
+
+
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes_by_action = {'create': [AllowAny]}
     queryset = CustomUser.objects.all().order_by('id')
-    serializer_class = UserViewSetzer
+    serializer_class = UserSerializer
 
     def get_permissions(self):
         try:
