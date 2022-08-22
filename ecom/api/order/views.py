@@ -22,7 +22,7 @@ def validate_user_session(id, token):
 @csrf_exempt
 def add(request, id, token):
     if not validate_user_session(id, token):
-        return JsonResponse('Error': 'Please RE-login', 'code': '1')
+        return JsonResponse({'Error': 'Please RE-login', 'code': '1'})
     if request.method == 'POST':
         user_id = id
         transaction_id = request.POST('transaction_id')
@@ -49,5 +49,5 @@ def add(request, id, token):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = order.objects.all().order_by('id')
+    queryset = Order.objects.all().order_by('id')
     serializer_class = OrderSerializer
