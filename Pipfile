@@ -9,6 +9,7 @@ django-cors-headers = "*"
 djangorestframework = "*"
 pillow = "*"
 typing-extensions = "*"
+braintree = "*"
 
 [dev-packages]
 
