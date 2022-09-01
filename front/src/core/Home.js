@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getProducts } from './helper/coreapicalls';
 
 function Home() {
+    const [product, getProducts] = useState([]);
+    const [error, setError] = useState(false);
+
     return (
         <div>
             <h1>
